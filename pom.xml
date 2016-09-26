@@ -4,7 +4,7 @@
 
     <groupId>com.github.lyeung</groupId>
     <artifactId>elwood-maven-runlistener</artifactId>
-    <version>1.0.0</version>
+    <version>${versionNumber}</version>
     <packaging>jar</packaging>
 
     <name>Elwood Maven Runlistener</name>
@@ -16,8 +16,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <versionNumber>latest</versionNumber>
         <junit.version>4.12</junit.version>
         <mockito.version>1.10.19</mockito.version>
+        <commons-io.version>2.5</commons-io.version>
     </properties>
 
     <licenses>
@@ -41,8 +43,7 @@
         <connection>scm:git:git://git@github.com:lyeung/elwood-maven-run-listener.git</connection>
         <developerConnection>scm:git:git://git@github.com:lyeung/elwood-maven-run-listener.git</developerConnection>
         <url>https://github.com/lyeung/elwood-maven-run-listener.git</url>
-      <tag>elwood-maven-runlistener-1.0.0</tag>
-  </scm>
+    </scm>
     <issueManagement>
         <system>GitHub</system>
         <url>https://github.com/lyeung/elwood-maven-run-listener/issues</url>
@@ -69,6 +70,12 @@
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <version>${mockito.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -126,36 +133,43 @@
                 </executions>
             </plugin>
 
-            <!--<plugin>-->
-            <!--<groupId>org.apache.maven.plugins</groupId>-->
-            <!--<artifactId>maven-checkstyle-plugin</artifactId>-->
-            <!--<version>2.16</version>-->
-            <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>validate</id>-->
-            <!--<phase>validate</phase>-->
-            <!--<configuration>-->
-            <!--<configLocation>etc/checkstyle/google_checks.xml</configLocation>-->
-            <!--<encoding>UTF-8</encoding>-->
-            <!--<consoleOutput>true</consoleOutput>-->
-            <!--<failsOnError>true</failsOnError>-->
-            <!--&lt;!&ndash;<linkXRef>true</linkXRef>&ndash;&gt;-->
-            <!--</configuration>-->
-            <!--<goals>-->
-            <!--<goal>check</goal>-->
-            <!--</goals>-->
-            <!--</execution>-->
-            <!--</executions>-->
-            <!--<dependencies>-->
-            <!--<dependency>-->
-            <!--<groupId>com.puppycrawl.tools</groupId>-->
-            <!--<artifactId>checkstyle</artifactId>-->
-            <!--<version>6.9</version>-->
-            <!--</dependency>-->
-            <!--</dependencies>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <profile>
+            <id>ossrh</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
+                        <executions>
+                            <execution>
+                                <id>sign-artifacts</id>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>sign</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 
     <!--<reporting>-->
     <!--<plugins>-->
