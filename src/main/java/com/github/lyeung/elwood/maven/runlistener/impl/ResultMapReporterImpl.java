@@ -54,7 +54,7 @@ public class ResultMapReporterImpl implements ResultMapReporter {
                     + ignored + "]");
         }
 
-        return new ResultMapReporterValue(ResultType.IGNORED, ignored, result.getIgnoreCount());
+        return new ResultMapReporterValue(ResultType.IGNORED, ignored);
     }
 
     @Override
@@ -67,7 +67,7 @@ public class ResultMapReporterImpl implements ResultMapReporter {
                     + failed + "]");
         }
 
-        return new ResultMapReporterValue(ResultType.FAILED, failed, result.getFailureCount());
+        return new ResultMapReporterValue(ResultType.FAILED, failed);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class ResultMapReporterImpl implements ResultMapReporter {
                     + success + "]");
         }
 
-        return new ResultMapReporterValue(ResultType.SUCCEEDED, success, result.getRunCount());
+        return new ResultMapReporterValue(ResultType.SUCCEEDED, success);
     }
 
     @Override

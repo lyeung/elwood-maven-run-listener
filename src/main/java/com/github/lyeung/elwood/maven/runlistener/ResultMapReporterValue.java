@@ -27,12 +27,10 @@ public class ResultMapReporterValue {
 
     private final ResultType resultType;
     private final int count;
-    private final int resultCount;
 
-    public ResultMapReporterValue(ResultType resultType, int count, int resultCount) {
+    public ResultMapReporterValue(ResultType resultType, int count) {
         this.resultType = resultType;
         this.count = count;
-        this.resultCount = resultCount;
     }
 
     public ResultType getResultType() {
@@ -41,9 +39,5 @@ public class ResultMapReporterValue {
 
     public int getCount() {
         return count;
-    }
-
-    public int getResultCount() {
-        return resultCount;
     }
 }

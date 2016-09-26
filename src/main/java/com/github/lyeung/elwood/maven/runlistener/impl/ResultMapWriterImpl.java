@@ -22,8 +22,10 @@ import com.github.lyeung.elwood.maven.runlistener.ResultMapWriter;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 
 /**
  * Created by lyeung on 25/09/16.
@@ -37,7 +39,8 @@ public class ResultMapWriterImpl implements ResultMapWriter {
         }
 
         final File resultFile = new File(targetDir, filename);
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(resultFile))) {
+        try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(
+                new FileOutputStream(resultFile), "UTF-8"))) {
             writer.write(content);
         } catch (IOException e) {
             // TODO: find a better way to capture this as a system exception

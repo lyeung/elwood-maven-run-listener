@@ -1,0 +1,3 @@
+success: [com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.successMethod1()]
+failed: [com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.failedMethod2(), com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.failedMethod1()]
+ignored: [com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.ignoredMethod3(), com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.ignoredMethod2(), com.github.lyeung.elwood.maven.runlistener.impl.ResultMapImplTest.ignoredMethod1()]
